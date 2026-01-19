@@ -1,4 +1,5 @@
 import { Router } from "express";
+import profileRoutes from "./profile.routes.js";
 
 const router = Router();
 
@@ -8,5 +9,7 @@ router.get("/health", (req, res) => {
     message: "API v1 health is OK ✅",
   });
 });
+
+router.use("/profile", profileRoutes);
 
 export default router;
