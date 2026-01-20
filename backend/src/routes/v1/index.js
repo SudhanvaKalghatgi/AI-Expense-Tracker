@@ -2,6 +2,7 @@ import { Router } from "express";
 import profileRoutes from "./profile.routes.js";
 import expenseRoutes from "./expense.routes.js";
 import recurringRoutes from "./recurring.routes.js";
+import reportRoutes from "./report.routes.js";
 
 const router = Router();
 
@@ -15,5 +16,6 @@ router.get("/health", (req, res) => {
 router.use("/profile", profileRoutes);
 router.use("/expenses", expenseRoutes);
 router.use("/recurring", recurringRoutes);
+router.use("/reports", reportRoutes);
 
 export default router;
