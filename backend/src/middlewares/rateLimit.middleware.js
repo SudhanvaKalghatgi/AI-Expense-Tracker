@@ -8,12 +8,11 @@ export const apiRateLimiter = rateLimit({
   legacyHeaders: false,
 
   handler: (req, res) => {
-    return res.status(429).json(
-      new ApiResponse(
-        429,
-        null,
-        "Too many requests. Please try again after some time."
-      )
-    );
+    return res.status(429).json({
+      statusCode: 429,
+      success: false,
+      message: "Too many requests. Please try again after some time.",
+      data: null,
+    });
   },
 });

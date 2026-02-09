@@ -21,12 +21,23 @@ export const createExpense = asyncHandler(async (req, res) => {
 export const getExpenses = asyncHandler(async (req, res) => {
   const { clerkUserId } = req.user;
 
-  const expenses = await getExpensesService(clerkUserId, req.query);
+  const { expenses, pagination } = await getExpensesService(
+    clerkUserId,
+    req.query
+  );
 
-  return res
-    .status(200)
-    .json(new ApiResponse(200, expenses, "Expenses fetched successfully ✅"));
+  return res.status(200).json(
+    new ApiResponse(
+      200,
+      {
+        data: expenses,
+        pagination,
+      },
+      "Expenses fetched successfully ✅"
+    )
+  );
 });
+
 
 export const updateExpense = asyncHandler(async (req, res) => {
   const { clerkUserId } = req.user;

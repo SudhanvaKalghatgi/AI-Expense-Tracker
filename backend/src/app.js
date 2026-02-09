@@ -10,21 +10,30 @@ import v1Routes from "./routes/v1/index.js";
 
 const app = express();
 
-// Security headers
+// --------------------
+// Security middlewares
+// --------------------
 app.use(helmet());
-
-// Allow frontend requests
 app.use(cors());
 
-// Parse JSON body
+// --------------------
+// Body parsing
+// --------------------
 app.use(express.json({ limit: "16kb" }));
 
-app.use("/api", apiRateLimiter, v1Routes);
-
-// Request logging
+// --------------------
+// Request logging (BEFORE routes)
+// --------------------
 app.use(requestLogger);
 
-// Health check route
+// --------------------
+// API routes (rate-limited)
+// --------------------
+app.use("/api/v1", apiRateLimiter, v1Routes);
+
+// --------------------
+// Health check
+// --------------------
 app.get("/", (req, res) => {
   res.status(200).json({
     success: true,
@@ -32,10 +41,9 @@ app.get("/", (req, res) => {
   });
 });
 
-// Versioned routes
-app.use("/api/v1", v1Routes);
-
-// Centralized error handler (ALWAYS at the end)
+// --------------------
+// Centralized error handler (ALWAYS last)
+// --------------------
 app.use(errorHandler);
 
 export default app;
