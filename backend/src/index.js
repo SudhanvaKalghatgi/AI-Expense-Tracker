@@ -8,7 +8,8 @@ import { startRecurringExpenseJob } from "./jobs/recurringExpense.job.js";
 import { startMonthlyEmailJob } from "./jobs/monthlyEmail.job.js";
 
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
 
 const startServer = async () => {
   try {
