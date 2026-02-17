@@ -24,7 +24,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://expense-ai-green.vercel.app/" 
+      "https://expense-ai-two.vercel.app" 
     ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
